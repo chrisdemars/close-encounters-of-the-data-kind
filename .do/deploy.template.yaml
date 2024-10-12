@@ -1,0 +1,9 @@
+spec:
+  name: us-aquarium-search
+  services:
+    - name: us-aquarium-search
+      build_command: npm run build
+      run_command: npm run start
+      git:
+        branch: main
+        repo_clone_url: https://do-community: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@github.com/do-community/us-aquarium-search.git
