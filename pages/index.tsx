@@ -80,8 +80,7 @@ export default function Home({
         <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '5rem' }}
           component="form"
           sx={{
-            '& > :not(style)': { m: 1, width: '50ch', fontWeight: 'bold' },
-            height: '100vh',
+            '& > :not(style)': { m: 1, width: '50ch', fontWeight: 'bold' }
           }}
           noValidate
           autoComplete="off"
