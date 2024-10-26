@@ -80,7 +80,7 @@ export default function Home({
         <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '5rem' }}
           component="form"
           sx={{
-            '& > :not(style)': { m: 1, width: '50ch', fontWeight: 'bold' }
+            '& > :not(style)': { m: 1, width: '50ch', fontWeight: 'bold' },
           }}
           noValidate
           autoComplete="off"
@@ -218,6 +218,8 @@ export default function Home({
           box-sizing: border-box;
         }
       `}</style>
+
+
     </>
   );
 }
