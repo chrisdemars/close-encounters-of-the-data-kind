@@ -5,11 +5,10 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Header from "../components/Header/Header";
 import EncounterCard from "../components/EncounterCard/EncounterCard";
-import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import Typography from "@mui/material/Typography";
 import { IndexProps } from "../types";
 import { Encounter } from "../types/encounter";
+import { SearchBar } from "../components/SearchBar/SearchBar";
 
 export const getServerSideProps: GetServerSideProps<IndexProps> = async () => {
   try {
@@ -70,33 +69,7 @@ export default function Home({
       </Head>
       <Header />
       <Container maxWidth="lg">
-        <Box
-          component="form"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            paddingTop: "5rem",
-            "& > :not(style)": { m: 1, width: "50ch", fontWeight: "bold" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            onChange={(e) => setSearch(e.target.value)}
-            id="outlined-basic"
-            label="Search for UFO Sightings"
-            variant="outlined"
-            aria-label="Search for UFO Sightings"
-          />
-
-          <Typography variant="body2" color="text.secondary">
-            *This is a list of some sample data of UFO/UAPUSO abductions and
-            sightings in the United States. Search for an encounter by name or
-            location.
-          </Typography>
-        </Box>
+        <SearchBar setSearch={setSearch} />
         <main>
           <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={4}>
             <EncounterCard encounters={filteredEncounters} />
