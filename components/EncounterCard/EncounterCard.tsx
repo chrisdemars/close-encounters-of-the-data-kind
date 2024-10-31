@@ -1,25 +1,11 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
-
-type Encounter = {
-  _id: string;
-  name: string;
-  location: string;
-  close_encounter_level: string;
-  extraterrestrial_type: string;
-  image: string;
-  url: string;
-};
-
-interface EncounterProps {
-  encounters: Encounter[];
-}
-
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import { EncounterProps } from "../../types/encounter";
 
 const EncounterCard: React.FC<EncounterProps> = ({ encounters }) => {
   return (
@@ -48,7 +34,13 @@ const EncounterCard: React.FC<EncounterProps> = ({ encounters }) => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Link href={encounter.url} target="_blank" rel="noopener noreferrer">{encounter.name} Info</Link>
+              <Link
+                href={encounter.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {encounter.name} Info
+              </Link>
             </CardActions>
           </Card>
         );
@@ -58,5 +50,3 @@ const EncounterCard: React.FC<EncounterProps> = ({ encounters }) => {
 };
 
 export default EncounterCard;
-
-

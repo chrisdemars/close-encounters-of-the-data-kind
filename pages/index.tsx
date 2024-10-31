@@ -1,32 +1,17 @@
 import Head from "next/head";
 import clientPromise from "../lib/mongodb";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Header from '../components/Header/Header';
-import EncounterCard from '../components/EncounterCard/EncounterCard';
-import TextField from '@mui/material/TextField';
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Header from "../components/Header/Header";
+import EncounterCard from "../components/EncounterCard/EncounterCard";
+import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import Typography from "@mui/material/Typography";
+import { IndexProps } from "../types";
+import { Encounter } from "../types/encounter";
 
-type Encounter = {
-  _id: string;
-  name: string;
-  location: string;
-  close_encounter_level: string;
-  extraterrestrial_type: string;
-  image: string;
-  url: string;
-};
-
-type IndexProps = {
-  isConnected: boolean;
-  encounters: Encounter[];
-};
-
-export const getServerSideProps: GetServerSideProps<
-  IndexProps
-> = async () => {
+export const getServerSideProps: GetServerSideProps<IndexProps> = async () => {
   try {
     await clientPromise;
     // `await clientPromise` will use the default database passed in the MONGODB_URI
@@ -46,7 +31,10 @@ export const getServerSideProps: GetServerSideProps<
       .toArray();
 
     return {
-      props: { isConnected: true, encounters: JSON.parse(JSON.stringify(encounters)) }
+      props: {
+        isConnected: true,
+        encounters: JSON.parse(JSON.stringify(encounters)),
+      },
     };
   } catch (e) {
     console.error(e);
@@ -54,18 +42,19 @@ export const getServerSideProps: GetServerSideProps<
       props: { isConnected: false, encounters: [] },
     };
   }
-
 };
 
 export default function Home({
-  encounters
+  encounters,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [search, setSearch] = useState("");
-  console.log(search);
 
   const filterEncounters = (encounter: Encounter) => {
-    return encounter.name.toLowerCase().includes(search.toLowerCase()) || encounter.location.toLowerCase().includes(search.toLowerCase());
-  }
+    return (
+      encounter.name.toLowerCase().includes(search.toLowerCase()) ||
+      encounter.location.toLowerCase().includes(search.toLowerCase())
+    );
+  };
 
   const filteredEncounters = encounters.filter(filterEncounters);
 
@@ -73,32 +62,47 @@ export default function Home({
     <>
       <Head>
         <title>UFO Encounters and Sightings</title>
+        <meta
+          name="description"
+          content="A collection of UFO, UAP, and USO sightings and encounters."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
       <Container maxWidth="lg">
-        <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', paddingTop: '5rem' }}
+        <Box
           component="form"
           sx={{
-            '& > :not(style)': { m: 1, width: '50ch', fontWeight: 'bold' },
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            paddingTop: "5rem",
+            "& > :not(style)": { m: 1, width: "50ch", fontWeight: "bold" },
           }}
           noValidate
           autoComplete="off"
         >
-          <TextField onChange={(e) => setSearch(e.target.value)} id="outlined-basic" label="Search for UFO Sightings" variant="outlined" />
+          <TextField
+            onChange={(e) => setSearch(e.target.value)}
+            id="outlined-basic"
+            label="Search for UFO Sightings"
+            variant="outlined"
+            aria-label="Search for UFO Sightings"
+          />
 
           <Typography variant="body2" color="text.secondary">
-            *This is a list of some sample data of UFO/UAPUSO abductions and sightings in the United States. Search for an encounter by name or location.
+            *This is a list of some sample data of UFO/UAPUSO abductions and
+            sightings in the United States. Search for an encounter by name or
+            location.
           </Typography>
-
-        </Box >
+        </Box>
         <main>
           <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={4}>
             <EncounterCard encounters={filteredEncounters} />
           </Box>
-
         </main>
-      </Container >
+      </Container>
       <footer>
         <a
           href="https://www.digitalocean.com/"
@@ -106,14 +110,18 @@ export default function Home({
           rel="noopener noreferrer"
         >
           Powered by{" "}
-          <img src="/do-blue-h-logo.png" alt="DigitalOcean Logo" className="logo" />
+          <img
+            src="/do-blue-h-logo.png"
+            alt="DigitalOcean Logo"
+            className="logo"
+          />
         </a>
       </footer>
 
       <style jsx>{`
-      .body {
-        background-image: url('https://archivesfoundation.org/wp-content/uploads/2019/12/ufo-7-e1575496085887-1024x518.jpg');
-      }
+        .body {
+          background-image: url("https://archivesfoundation.org/wp-content/uploads/2019/12/ufo-7-e1575496085887-1024x518.jpg");
+        }
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -201,25 +209,14 @@ export default function Home({
         body {
           padding: 0;
           margin: 0;
-          font-family:
-            -apple-system,
-            BlinkMacSystemFont,
-            Segoe UI,
-            Roboto,
-            Oxygen,
-            Ubuntu,
-            Cantarell,
-            Fira Sans,
-            Droid Sans,
-            Helvetica Neue,
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
         }
         * {
           box-sizing: border-box;
         }
       `}</style>
-
-
     </>
   );
 }
