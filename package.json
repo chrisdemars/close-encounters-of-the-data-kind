@@ -11,7 +11,7 @@
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
-    "@mui/icons-material": "latest",
+    "@mui/icons-material": "5.18.0",
     "@mui/material": "latest",
     "@mui/material-nextjs": "latest",
     "@types/express": "^4.17.21",
