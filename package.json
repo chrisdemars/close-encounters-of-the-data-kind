@@ -12,7 +12,7 @@
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
-    "@mui/material": "latest",
+    "@mui/material": "5.18.0",
     "@mui/material-nextjs": "latest",
     "@types/express": "^4.17.21",
     "cors": "^2.8.5",
