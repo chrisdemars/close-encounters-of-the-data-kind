@@ -22,7 +22,7 @@
     "openai": "^3.2.1",
     "react": "latest",
     "react-dom": "latest",
-    "tsx": "^4.16.2"
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
