@@ -19,7 +19,7 @@
     "dotenv": "^16.4.5",
     "mongodb": "^6.20.0",
     "next": "latest",
-    "openai": "^3.2.1",
+    "openai": "^4.0.0",
     "react": "latest",
     "react-dom": "latest",
     "tsx": "^4.16.2"
